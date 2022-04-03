@@ -1,34 +1,40 @@
 import { Button, Card } from 'antd'
 import { Table } from 'antd'
 import { useEffect, useState } from 'react'
-import { getList, login } from '../../service/productService'
+import { getUserContext, login } from '../../service/productService'
 function List() {
-  const [data1, setData] = useState()
+  const [data, setData] = useState()
   useEffect(() => {
-    getList().then((res) => {
-      console.log(res)
+    const params = {
+      account: '17716471146',
+    }
+    getUserContext(params).then((res) => {
+      let result = [0]
+      result[0] = res.data
+      console.log(result)
+      setData(result)
     })
   }, [])
 
   const columns = [
     {
-      title: 'Name',
-      dataIndex: 'name',
-      key: 'name',
-      render: (text) => <a>{text}</a>,
+      title: '昵称',
+      dataIndex: 'nickName',
+      key: 'nickName',
     },
     {
-      title: 'Age',
-      dataIndex: 'age',
-      key: 'age',
+      title: '账号',
+      dataIndex: 'account',
+      key: 'account',
     },
     {
-      title: 'Address',
-      dataIndex: 'address',
-      key: 'address',
+      title: '性别',
+      dataIndex: 'gender',
+      key: 'gender',
     },
+
     {
-      title: 'Action',
+      title: '操作',
       key: 'action',
       render: (text, record) => (
         <div>
@@ -38,30 +44,6 @@ function List() {
           </Button>
         </div>
       ),
-    },
-  ]
-
-  const data = [
-    {
-      key: '1',
-      name: 'John Brown',
-      age: 32,
-      address: 'New York No. 1 Lake Park',
-      tags: ['nice', 'developer'],
-    },
-    {
-      key: '2',
-      name: 'Jim Green',
-      age: 42,
-      address: 'London No. 1 Lake Park',
-      tags: ['loser'],
-    },
-    {
-      key: '3',
-      name: 'Joe Black',
-      age: 32,
-      address: 'Sidney No. 1 Lake Park',
-      tags: ['cool', 'teacher'],
     },
   ]
 

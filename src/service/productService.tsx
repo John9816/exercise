@@ -5,8 +5,8 @@ export interface LoginParamsType {
   password: string
 }
 
-export function getList() {
-  return get('/article/test', '')
+export function getUserContext(params) {
+  return post('/user/getUserContext', params)
 }
 
 export function login(params) {
